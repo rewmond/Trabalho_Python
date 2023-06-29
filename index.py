@@ -230,7 +230,7 @@ while i == 0:
 
                         # Opções do usuário
                         print('\nDigite: (0) Para Voltar\n')
-                        voltar = int(input('Opção: '))
+                        voltar = input('Opção: ')
 
                         if voltar == 0:
                             time.sleep(1)
