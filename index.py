@@ -174,7 +174,7 @@ while i == 0:
                             print(f"Valor total na conta: R$ {valor_total}\n")
 
                         elif number == 2:
-                            print("\nDigites os valores use ( . ou , )\n")
+                            print("\nDigites os valores\n")
                             
                             extrato_numero()
                             # Calcula o extrato
@@ -211,7 +211,7 @@ while i == 0:
                                         print(f"Diferença do valor para a meta:\nMês: R$ {resultadoMes},\nAno: R$ {resultadoAno}")
                                         
                                     elif number == 2:
-                                        print("\nDigite os valores (use ponto ou vírgula para casas decimais)\n")
+                                        print("\nDigite os valores\n")
                                         
                                         meta_numero()
 
