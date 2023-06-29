@@ -20,19 +20,32 @@ perdas = 0
 valor_total = 0
 metaMes = 0
 metaAno = 0
+resultadoMes = 0
+resultadoAno = 0
 #O programa é iniciado dentro de uma estrutura de repetição, 
+
+#Vai validar a opção do usuário
+def receber_numero():
+    while True:
+        entrada = input("Digite um número: ")
+        if entrada.isdigit():
+            numero = int(entrada)
+            return numero
+        else:
+            print("\033[0;49;91mEntrada inválida. Digite apenas números.\033[m")
 
 while i == 0:
 
 
     #Começo
-    print('----Controle de Finanças Pessoais / C.F.P.----')
+    print('\033[0;49;36m----Controle de Finanças Pessoais / C.F.P.----\033[m')
 
     #Opções do usuário
-    print('Digite: \n(1) Para Entrar \n(2) Para Cadastrar Usuário \n(3) Para Sair\n ')
+    print('Digite: \n(1) Para Entrar \n(2) Para Cadastrar Usuário \n(3) \033[0;49;91mSair\033[m\n ')
 
-    #Vai validar a opção do usuário
-    opcao = int(input('Opção: '))
+
+    # Exemplo de uso
+    opcao = receber_numero()
 
     #Utilizando match para executar uma ação de acordo com a escolha do usuário
     match opcao:
@@ -41,10 +54,10 @@ while i == 0:
         case 1:
             #Informar usuário que ele está fazendo um login
             print('Digite usuário e senha para ter acesso as suas informações')
+
             #Inputação dos dados
             usuario = input('Usuário: ')
-            senha = int(input('Senha: '))
-
+            senha = input('Senha: ')
             #Validação de Usuário e Senha
 
             #Se o usúario inputado pelo usuário bater com um usuário já cadastrado, o usuário entra para usuario_valido
@@ -61,7 +74,7 @@ while i == 0:
                 os.system('cls')
 
                 #Volta pro match case
-                print('Usuário ou senha invalidos, tente novamente!')
+                print('\033[0;49;91mUsuário ou senha invalidos, tente novamente!\033[m')
 
                 #Soma 1 a tentativas
                 tentativas += 1
@@ -91,35 +104,80 @@ while i == 0:
 
 
                 def extrato():
-                    print('---------------------Inicio do Programa--------------------------')
+                    print('\033[0;49;36m---------------------Inicio do Programa--------------------------\033[m')
                     # Valor inicial da conta
                      #Deixar global para quando sair do while ficar salvo
-                    global valor_total
-                    global perdas
-                    global ganhos
+                    
                     
                     while True:
                         # Começo
-                        print('Controle de Finanças Pessoais / C.F.P.')
+                        print('\033[0;49;36mControle de Finanças Pessoais / C.F.P.\033[m')
 
                         # Opções do usuário
                         print('Digite: \n(1) Ver Extrato \n(2) Adicionar ganhos e perdas \n(3) Metas do usuario \n(4) Para Tela Inicial\n')
 
                         # Valida a opção do usuário
-                        number = int(input('Opção: '))
+                        def receber_numero():
+                            while True:
+                                entrada = input("Digite um número: ")
+                                if entrada.isdigit():
+                                    numero = int(entrada)
+                                    return numero
+                                else:
+                                    print("\033[0;49;91mEntrada inválida. Digite apenas números.\033[m")
+                       
+                        def extrato_numero():
+                            global perdas
+                            global ganhos
+                            global valor_total
+
+                            while True:
+                                ganho = input("Digite o valor dos ganhos do mês: ").replace(',', '.')
+                                perda = input("Digite o valor das perdas do mês: ").replace(',', '.')
+                                if ganho.isdigit() and perda.isdigit():
+                                    ganhos = int(ganho)
+                                    perdas = int(perda)
+                                    valor_total += ganhos - perdas
+                                    return ganhos,perdas,valor_total
+                                else:
+                                    print("\033[0;49;91mEntrada inválida. Digite apenas números.\033[m")
+
+                        def meta_numero():
+                            global metaAno
+                            global metaMes
+                            global resultadoMes
+                            global resultadoAno
+
+                            while True:
+                                Mes = input("Digite a meta do mês: ").replace(',', '.')
+                                Ano = input("Digite a meta do ano: ").replace(',', '.')
+
+                                if Mes.isdigit() and Ano.isdigit():
+                                    metaMes = int(Mes)
+                                    metaAno = int(Ano)
+
+                                    resultadoMes = valor_total - metaMes
+                                    resultadoAno = valor_total - metaAno
+    
+                                    return metaAno , metaMes
+                                else:
+                                    print("\033[0;49;91mEntrada inválida. Digite apenas números.\033[m")
+
+                        # Exemplo de uso
+                        number = receber_numero()
+
 
                         if number == 1:
                             print(f"Ganhos: R$ {ganhos}")
                             print(f"Perdas: R$ {perdas}\n")
+                            print(f"\nMetas: Mês: R$ {metaMes},\nAno: R$ {metaAno}\n")
                             print(f"Valor total na conta: R$ {valor_total}\n")
 
                         elif number == 2:
                             print("\nDigites os valores use ( . ou , )\n")
-                            ganhos = float(input("Digite o valor dos ganhos do mês: ").replace(',', '.'))
-                            perdas = float(input("Digite o valor das perdas do mês: ").replace(',', '.'))
-
+                            
+                            extrato_numero()
                             # Calcula o extrato
-                            valor_total += ganhos - perdas
                             print("Extrato do mês:")
                             print(f"Ganhos: R$ {ganhos}")
                             print(f"Perdas: R$ {perdas}")
@@ -132,20 +190,30 @@ while i == 0:
                                 global metaMes
 
                                 while True:
-                                    print('\nDigite: \n(1) Ver Meta \n(2) Adicionar Meta\n(3) Voltar')
-                                    number = int(input('Opção: '))
+                                    print('\nDigite: \n(1) Ver Meta \n(2) Adicionar Meta\n(3) \033[0;49;91mVoltar\033[m ')
+                                    def receber_numero():
+                                        while True:
+                                            entrada = input("Digite um número: ")
+                                            if entrada.isdigit():
+                                                numero = int(entrada)
+                                                return numero
+                                            else:
+                                                print("\033[0;49;91mEntrada inválida. Digite apenas números.\033[m")
+
+                                    # Exemplo de uso
+                                    number = receber_numero()
+
 
                                     if number == 1:
                                         print(f"Meta para a conta:\nMês: R$ {metaMes},\nAno: R$ {metaAno}")
                                         print(f"Valor na conta: R$ {valor_total}\n")
-                                        resultadoMes = valor_total - metaMes
-                                        resultadoAno = valor_total - metaAno
+                                        
                                         print(f"Diferença do valor para a meta:\nMês: R$ {resultadoMes},\nAno: R$ {resultadoAno}")
                                         
                                     elif number == 2:
                                         print("\nDigite os valores (use ponto ou vírgula para casas decimais)\n")
-                                        metaMes = float(input("Digite a meta do mês: ").replace(',', '.'))
-                                        metaAno = float(input("Digite a meta do ano: ").replace(',', '.'))
+                                        
+                                        meta_numero()
 
                                         print("---- Metas ----")
                                         print(f"Meta para a conta:\nMês: R$ {metaMes},\nAno: R$ {metaAno}\n")
@@ -170,7 +238,7 @@ while i == 0:
                             os.system('cls')
                         else:
                             #Alerta o usuário de que escolheu uma opção inexistente 
-                            print('Opção inválida!')
+                            print('\033[0;49;91mOpção inválida!\033[m')
                             #Pausa de 2 segundos
                             time.sleep(1)
                             #Limpa a tela
@@ -182,13 +250,16 @@ while i == 0:
         case 2:
             #Informar usuário que ele está fazendo um cadastro de usuário
             print('Faça o cadastro para ter acesso ao programa!')
-            #Inputação dos dados
-            usuario = input('Crie um Usuário: ')
-            senha = int(input('Crie uma Senha (Só números):'))
+
+            # Captura os valores de nome de usuário e senha dos inputs do usuário
+            usuario = input("Digite o nome de usuário: ")
+            senha = input("Digite a senha: ")
 
             #Salvar os dados cadastrados em variaveis, para validar a opção 1. Entrar
             usuario_cadastrado = usuario
             senha_cadastrada = senha
+
+            print("\033[0;49;92mOs dados foram salvos com sucesso.\033[m")
 
             #Pausa de 2 segundos
             time.sleep(1)
@@ -207,7 +278,7 @@ while i == 0:
         #Um case que abrange caracteres quaisquer, diferentes dos três especificados
         case _:
             #Alerta o usuário de que escolheu uma opção inexistente 
-            print('Opção inválida!')
+            print('\033[0;49;91mOpção inválida!\033[m')
             #Pausa de 2 segundos
             time.sleep(1)
             #Limpa a tela
